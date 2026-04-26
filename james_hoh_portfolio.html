@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoh Boon Fung (James) — Cloud Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --surface-hover: #fdfdfd;
+      --text-main: #111827;
+      --text-muted: #4b5563;
+      --text-light: #9ca3af;
+      --border: #e5e7eb;
+      --border-hover: #d1d5db;
+      --accent: #2563eb;
+      --accent-bg: #eff6ff;
+      --accent-text: #1d4ed8;
+      --pill-bg: #f3f4f6;
+      --pill-text: #374151;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+
+      --mesh-bg: radial-gradient(at 100% 0%, hsla(217, 100%, 92%, 1) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, hsla(217, 100%, 96%, 1) 0px, transparent 50%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #030712;
+        --surface: #111827;
+        --surface-hover: #1f2937;
+        --text-main: #f9fafb;
+        --text-muted: #9ca3af;
+        --text-light: #6b7280;
+        --border: #374151;
+        --border-hover: #4b5563;
+        --accent: #60a5fa;
+        --accent-bg: #1e3a8a;
+        --accent-text: #bfdbfe;
+        --pill-bg: #1f2937;
+        --pill-text: #d1d5db;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+        --shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.6);
+
+        --mesh-bg: radial-gradient(at 100% 0%, hsla(217, 50%, 15%, 1) 0px, transparent 40%),
+          radial-gradient(at 0% 0%, hsla(217, 30%, 10%, 1) 0px, transparent 40%);
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      background-image: var(--mesh-bg);
+      background-attachment: fixed;
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade {
+      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .fade-1 {
+      animation-delay: 0.1s;
+    }
+
+    .fade-2 {
+      animation-delay: 0.2s;
+    }
+
+    .fade-3 {
+      animation-delay: 0.3s;
+    }
+
+    .fade-4 {
+      animation-delay: 0.4s;
+    }
+
+    .fade-5 {
+      animation-delay: 0.5s;
+    }
+
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+      gap: 2rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      font-weight: 500;
+      background: var(--accent-bg);
+      color: var(--accent-text);
+      padding: 6px 12px;
+      border-radius: 99px;
+      margin-bottom: 1.25rem;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.2rem;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .name em {
+      font-style: italic;
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+
+    .contact-info {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .contact-item svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .contact-item a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-item a:hover {
+      color: var(--accent);
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .aws-badge-link {
+      display: block;
+      flex-shrink: 0;
+      transform: rotate(-3deg);
+      transition: transform 0.3s ease, filter 0.3s ease;
+      border-radius: 12px;
+      outline: none;
+    }
+
+    .aws-badge-link:hover,
+    .aws-badge-link:focus {
+      transform: rotate(0deg) scale(1.08);
+      filter: drop-shadow(0 8px 24px rgba(255, 153, 0, 0.35));
+    }
+
+    .aws-badge-link img {
+      width: 110px;
+      height: 110px;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header {
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+    }
+
+    .section-header::after {
+      content: '';
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .summary-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    .summary-card strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .skill-category-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-pill {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: var(--pill-bg);
+      color: var(--pill-text);
+    }
+
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .modern-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modern-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .modern-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modern-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .card-meta {
+      font-size: 13px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-light);
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .ul-points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .ul-points li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .ul-points li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--text-light);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      top: 2px;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .cert-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cert-details h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .cert-details p {
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      color: var(--text-muted);
+    }
+
+    .footer {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        flex-direction: column-reverse;
+      }
+
+      .name {
+        font-size: 2.5rem;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <header class="hero fade fade-1">
+      <div>
+        <div class="status-badge">
+          <div class="status-dot"></div>
+          Open to Cloud Engineer (Associate) Roles
+        </div>
+
+        <h1 class="name">Hoh Boon Fung <br><em>James</em></h1>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Klang, Selangor, Malaysia
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <a href="mailto:jameswindf@gmail.com" target="_blank" rel="noopener">jameswindf@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+              </path>
+            </svg>
+            <a href="https://github.com/JamesHBF296" target="_blank" rel="noopener">GitHub Profile</a>
+          </div>
+        </div>
+
+        <div class="tech-stack">
+          <span class="tech-tag">AWS SAA-C03</span>
+          <span class="tech-tag">Terraform</span>
+          <span class="tech-tag">Linux</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">GitHub Action</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Rust</span>
+          <span class="tech-tag">Flutter</span>
+        </div>
+      </div>
+      <a class="aws-badge-link" href="https://www.credly.com/badges/6b5d66c6-3bd9-4cd0-8eb8-0c9f46bc167f"
+        target="_blank" rel="noopener" title="Verify AWS Solutions Architect – Associate on Credly">
+        <img src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png"
+          alt="AWS Certified Solutions Architect – Associate Badge" loading="eager" />
+      </a>
+
+    </header>
+
+    <section class="section fade fade-2">
+      <h2 class="section-header">Professional Summary</h2>
+      <div class="summary-card">
+        <strong>Cloud Engineer (Associate)</strong> with 5 years of experience in mobile and backend development,
+        actively transitioning into <strong>Cloud Engineering</strong>.
+        AWS Certified Solutions Architect with practical expertise in <strong>AWS core services</strong>, Linux
+        administration, and <strong>Infrastructure as Code (Terraform)</strong>.
+        Dedicated to bridging application logic with secure, operations-aware, and scalable cloud infrastructure.
+      </div>
+    </section>
+
+    <section class="section fade fade-3">
+      <h2 class="section-header">Core Competencies</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <div class="skill-category-title">Cloud & Infrastructure</div>
+          <div class="skill-list">
+            <span class="skill-pill">AWS (EC2, ALB, ASG)</span>
+            <span class="skill-pill">Terraform</span>
+            <span class="skill-pill">VPC Networking</span>
+            <span class="skill-pill">Docker</span>
+            <span class="skill-pill">Linux (Amazon Linux)</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">Application Development</div>
+          <div class="skill-list">
+            <span class="skill-pill">Flutter & Dart</span>
+            <span class="skill-pill">Node.js</span>
+            <span class="skill-pill">Rust</span>
+            <span class="skill-pill">PostgreSQL</span>
+            <span class="skill-pill">Firebase</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-category-title">DevOps & Tooling</div>
+          <div class="skill-list">
+            <span class="skill-pill">Bash Scripting</span>
+            <span class="skill-pill">Git / Bitbucket</span>
+            <span class="skill-pill">GitHub Action</span>
+            <span class="skill-pill">Infrastructure Automation</span>
+            <span class="skill-pill">System Monitoring</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade fade-4">
+      <h2 class="section-header">Cloud & Automation Projects</h2>
+      <div class="card-list">
+        <article class="modern-card">
+          <div class="card-header">
+            <h3 class="card-title">High-Availability AWS Architecture</h3>
+            <span class="card-meta">Personal Lab / IaC</span>
+          </div>
+          <ul class="ul-points">
+            <li>Designed and provisioned AWS infrastructure using <strong>Terraform</strong>, including modular VPC
+              configurations and fine-grained Security Groups.</li>
+            <li>Built a <strong>High-Availability environment</strong> featuring an Application Load Balancer (ALB) and
+              Auto Scaling Group (ASG) across multiple Availability Zones.</li>
+            <li>Automated server initialization using <strong>EC2 User Data (Bash)</strong> to configure runtime
+              environments and dependencies.</li>
+            <li>Simulated production networking by strictly separating public and private subnets within a structured
+              VPC setup.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section fade fade-4">
+      <h2 class="section-header">Professional Experience</h2>
+      <div class="card-list">
+        <article class="modern-card">
+          <div class="card-header">
+            <h3 class="card-title">N2N Connect</h3>
+            <span class="card-meta">July 2023 – Dec 2025</span>
+          </div>
+          <div class="card-subtitle">Software Engineer</div>
+          <ul class="ul-points">
+            <li>Developed scalable backend microservices using <strong>Node.js and Rust</strong> via Firebase Cloud
+              Functions.</li>
+            <li>Managed PostgreSQL databases and integrated secure payment gateways (Stripe, AirWallex) for SaaS
+              products.</li>
+            <li>Collaborated on API contracts to reduce friction between frontend and backend teams.</li>
+          </ul>
+        </article>
+
+        <article class="modern-card">
+          <div class="card-header">
+            <h3 class="card-title">Silverlake Digital Inx</h3>
+            <span class="card-meta">June 2021 – July 2023</span>
+          </div>
+          <div class="card-subtitle">Android App Developer</div>
+          <ul class="ul-points">
+            <li>Maintained enterprise financial apps for RHB Bank, focusing on e-KYC and stock trading features.</li>
+            <li>Led the <strong>migration of legacy Java code to Flutter</strong>, enhancing responsiveness and
+              maintainability.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section fade fade-5">
+      <h2 class="section-header">Education & Certifications</h2>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+            </svg>
+          </div>
+          <div class="cert-details">
+            <h4>AWS Solutions Architect – Associate</h4>
+            <p>ID: 78e856b6eefe4d53bb47006d7d032072</p>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </div>
+          <div class="cert-details">
+            <h4>B.Info System Engineering (Hons)</h4>
+            <p>UTAR · CGPA 3.09</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer fade fade-5">
+      <div>&copy; 2026 Hoh Boon Fung (James).</div>
+      <div>Based in Selangor, Malaysia</div>
+    </footer>
+
+  </div>
+</body>
+
+</html>
