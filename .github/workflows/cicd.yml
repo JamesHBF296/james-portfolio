@@ -49,11 +49,11 @@ jobs:
       - name: Tag image
         run: |
           docker tag portfolio:latest \
-          229378727524.dkr.ecr.ap-southeast-5.amazonaws.com/jameshoh/portfolio:latest
+          229378727524.dkr.ecr.ap-southeast-5.amazonaws.com/jameshbf296/james-portfolio:latest
 
       - name: Push image
         run: |
-          docker push 229378727524.dkr.ecr.ap-southeast-5.amazonaws.com/jameshoh/portfolio:latest
+          docker push 229378727524.dkr.ecr.ap-southeast-5.amazonaws.com/jameshbf296/james-portfolio:latest
         
   deploy:
     needs: build-and-push
@@ -74,10 +74,10 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
               "aws ecr get-login-password --region ap-southeast-5 | docker login --username AWS --password-stdin 229378727524.dkr.ecr.ap-southeast-5.amazonaws.com",
-              "docker pull 229378727524.dkr.ecr.ap-southeast-5.amazonaws.com/jameshoh/portfolio:latest",
+              "docker pull 229378727524.dkr.ecr.ap-southeast-5.amazonaws.com/jameshbf296/james-portfolio:latest",
               "docker stop web-nginx || true",
               "docker rm web-nginx || true",
-              "docker run -d --name web-nginx -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencrypt:ro -v /home/ec2-user/dockerfile/nginx-config/default.conf:/etc/nginx/conf.d/default.conf:ro --restart always 229378727524.dkr.ecr.ap-southeast-5.amazonaws.com/jameshoh/portfolio:latest"
+              "docker run -d --name web-nginx -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencrypt:ro -v /home/ec2-user/dockerfile/nginx-config/default.conf:/etc/nginx/conf.d/default.conf:ro --restart always 229378727524.dkr.ecr.ap-southeast-5.amazonaws.com/jameshbf296/james-portfolio:latest"
             ]'
 
   #docker run -d --name web-nginx   -p 80:80 -p 443:443   -v /etc/letsencrypt:/etc/letsencrypt:ro   -v /home/ec2-user/dockerfile/nginx-config/default.conf:/etc/nginx/conf.d/default.conf:ro   --restart always   web-nginx   
