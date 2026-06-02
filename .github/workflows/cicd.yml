@@ -5,6 +5,12 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options:
+          - dev
+          - prod
 
 permissions:
   id-token: write
@@ -33,7 +39,7 @@ jobs:
     name: Build and push docker image
     needs: web_build_test
     runs-on: ubuntu-latest
-
+    environment: dev
     steps:
       - uses: actions/checkout@v6
 
@@ -66,7 +72,7 @@ jobs:
     name: Deploy to EC2 via SSM
     needs: build_and_push_docker_image
     runs-on: ubuntu-latest
-
+    environment: dev
     steps:
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v4
