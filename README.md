@@ -71,7 +71,7 @@ flowchart TD
     B4 --> C1 --> C2
 
     subgraph Deployment Layer
-        D1[AWS Systems Manager (SSM)]
+        D1[AWS Systems Manager SSM]
         D2[EC2 Instance]
         D3[Docker Container - NGINX]
         D4[Static Portfolio Served]
